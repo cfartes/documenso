@@ -2932,7 +2932,6 @@ msgstr "Can't find someone?"
 #: apps/remix/app/routes/_authenticated+/admin+/email-domains.$id.tsx
 #: apps/remix/app/routes/_authenticated+/settings+/security.linked-accounts.tsx
 #: packages/ui/primitives/document-flow/field-item-advanced-settings.tsx
-#: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
 #: packages/ui/primitives/signature-pad/signature-pad-dialog.tsx
 msgid "Cancel"
 msgstr "Cancel"
@@ -5220,7 +5219,6 @@ msgstr "Don't have an account? <0>Sign up</0>"
 msgid "Don't repeat"
 msgstr "Don't repeat"
 
-#: apps/remix/app/components/dialogs/team-delete-dialog.tsx
 #: apps/remix/app/components/dialogs/team-delete-dialog.tsx
 msgid "Don't transfer (Delete all documents)"
 msgstr "Don't transfer (Delete all documents)"
@@ -11019,8 +11017,6 @@ msgstr "Selector"
 #: apps/remix/app/components/dialogs/webhook-test-dialog.tsx
 #: packages/ui/primitives/document-flow/add-subject.tsx
 #: packages/ui/primitives/document-flow/add-subject.tsx
-#: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
-#: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
 msgid "Send"
 msgstr "Send"
 
@@ -11043,7 +11039,6 @@ msgstr "Send document"
 #: apps/remix/app/components/dialogs/envelope-distribute-dialog.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor-header.tsx
 #: apps/remix/app/components/general/envelope-editor/envelope-editor.tsx
-#: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
 msgid "Send Document"
 msgstr "Send Document"
 
@@ -15535,10 +15530,6 @@ msgstr "You are about to remove the following user from the team <0>{teamName}</
 #: apps/remix/app/components/general/teams/team-email-usage.tsx
 msgid "You are about to revoke access for team <0>{0}</0> ({1}) to use your email."
 msgstr "You are about to revoke access for team <0>{0}</0> ({1}) to use your email."
-
-#: packages/ui/primitives/document-flow/send-document-action-dialog.tsx
-msgid "You are about to send this document to the recipients. Are you sure you want to continue?"
-msgstr "You are about to send this document to the recipients. Are you sure you want to continue?"
 
 #: apps/remix/app/components/general/billing-plans.tsx
 msgid "You are about to subscribe to the {planName}"
