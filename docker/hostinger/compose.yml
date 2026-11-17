@@ -1,0 +1,53 @@
+name: nexus-documenso
+
+services:
+  database:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: documenso
+      POSTGRES_DB: documenso
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Configure POSTGRES_PASSWORD}
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U documenso -d documenso']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  documenso:
+    image: nexus-documenso:local
+    build:
+      context: ../..
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      PORT: '3000'
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET:?Configure NEXTAUTH_SECRET}
+      NEXT_PRIVATE_ENCRYPTION_KEY: ${NEXT_PRIVATE_ENCRYPTION_KEY:?Configure NEXT_PRIVATE_ENCRYPTION_KEY}
+      NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY: ${NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY:?Configure NEXT_PRIVATE_ENCRYPTION_SECONDARY_KEY}
+      NEXT_PRIVATE_SMTP_HOST: ${NEXT_PRIVATE_SMTP_HOST:?Configure SMTP}
+      NEXT_PRIVATE_SMTP_FROM_ADDRESS: ${NEXT_PRIVATE_SMTP_FROM_ADDRESS:?Configure o remetente SMTP}
+      NEXT_PUBLIC_WEBAPP_URL: https://documenso.nexusdataanalytics.tech
+      NEXT_PRIVATE_INTERNAL_WEBAPP_URL: http://localhost:3000
+      NEXT_PRIVATE_DATABASE_URL: postgresql://documenso:${POSTGRES_PASSWORD:?Configure POSTGRES_PASSWORD}@database:5432/documenso
+      NEXT_PRIVATE_DIRECT_DATABASE_URL: postgresql://documenso:${POSTGRES_PASSWORD:?Configure POSTGRES_PASSWORD}@database:5432/documenso
+      NEXT_PRIVATE_SIGNING_LOCAL_FILE_PATH: /opt/documenso/cert.p12
+      NEXT_PUBLIC_UPLOAD_TRANSPORT: database
+    ports:
+      - '127.0.0.1:${DOCUMENSO_PORT:-3100}:3000'
+    volumes:
+      - type: bind
+        source: ./cert.p12
+        target: /opt/documenso/cert.p12
+        read_only: true
+        bind:
+          create_host_path: false
+
+volumes:
+  database:
